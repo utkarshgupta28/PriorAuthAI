@@ -1,0 +1,12 @@
+frontend/node_modules/
+frontend/dist/
+backend/venv/
+backend/__pycache__/
+backend/data/__pycache__/
+backend/tools/__pycache__/
+backend/utils/__pycache__/
+frontend/src/**/__pycache__/
+*.pyc
+*.pyo
+backend/.env
+*.db
