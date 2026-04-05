@@ -54,6 +54,64 @@ npm run dev
 
 Open `http://localhost:5173`.
 
+## Railway Deployment
+
+Deploy this repo to Railway as two services:
+
+1. `backend` service
+2. `frontend` service
+
+### Backend Service
+
+- Root directory: `backend`
+- Build command:
+
+```bash
+pip install -r requirements.txt
+```
+
+- Start command:
+
+```bash
+uvicorn main:app --host 0.0.0.0 --port $PORT
+```
+
+- Required environment variables:
+
+```env
+API_KEY=your_provider_key_here
+API_BASE_URL=https://api.mistral.ai/v1
+MODEL=mistral-small-latest
+CORS_ORIGINS=https://your-frontend-service.up.railway.app
+```
+
+### Frontend Service
+
+- Root directory: `frontend`
+- Build command:
+
+```bash
+npm install && npm run build
+```
+
+- Start command:
+
+```bash
+npm run start
+```
+
+- Required environment variables:
+
+```env
+VITE_API_BASE_URL=https://your-backend-service.up.railway.app/api
+```
+
+### Notes
+
+- Set `CORS_ORIGINS` on the backend to the public Railway URL of the frontend service.
+- Set `VITE_API_BASE_URL` on the frontend to the public Railway URL of the backend service.
+- SQLite will work for a demo deployment, but Railway volumes or a hosted database are better if you need persistent production data.
+
 ## Environment
 
 The backend uses a single provider key and a single model configuration.
@@ -62,6 +120,7 @@ The backend uses a single provider key and a single model configuration.
 API_KEY=your_provider_key_here
 API_BASE_URL=https://api.mistral.ai/v1
 MODEL=mistral-small-latest
+CORS_ORIGINS=http://localhost:5173,http://127.0.0.1:5173
 ```
 
 If `API_KEY` is blank, the app runs in deterministic fallback mode.
