@@ -142,9 +142,3 @@ If `API_KEY` is blank, the app runs in deterministic fallback mode.
 | POST | `/api/cases/{id}/deny` | Simulate denial |
 | GET | `/api/metrics` | Get dashboard metrics |
 
-## Notes
-
-- The current backend is not using CrewAI.
-- The current project is not using hybrid multi-provider orchestration.
-- The active supported live path is a direct provider API call using the values in `backend/.env`.
-- Fallback mode is kept intentionally so the demo still works if live AI is unavailable.
